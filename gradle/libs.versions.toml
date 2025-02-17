@@ -14,6 +14,8 @@ glide = "4.11.0"
 retrofit = "2.9.0"
 ksp = "2.0.21-1.0.27"
 room = "2.6.1"
+viewmodelKtx = "2.8.7"
+okhttpVersion = "4.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +34,9 @@ retrofit-gson-convertor = { group = "com.squareup.retrofit2", name = "converter-
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewmodelKtx" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

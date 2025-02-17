@@ -67,4 +67,8 @@ dependencies {
     implementation(libs.room)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
+
+    implementation(libs.viewmodel.ktx)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
 }
