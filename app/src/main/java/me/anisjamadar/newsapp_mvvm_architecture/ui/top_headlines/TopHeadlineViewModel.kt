@@ -7,12 +7,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
-import me.anisjamadar.newsapp_mvvm_architecture.data.repository.TopHeadlinesRepository
+import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
+import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepositoryImpl
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import me.anisjamadar.newsapp_mvvm_architecture.utils.AppConstant.COUNTRY
 
 class TopHeadlineViewModel(
-    private val topHeadlinesRepository: TopHeadlinesRepository
+    private val newsRepository: NewsRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
@@ -24,7 +25,7 @@ class TopHeadlineViewModel(
 
     private fun fetchNews() {
         viewModelScope.launch {
-            topHeadlinesRepository.getTopHeadlines(COUNTRY)
+            newsRepository.getTopHeadlines(COUNTRY)
                 .catch {
                     _uiState.value = UiState.Error(it.toString())
                 }.collect {

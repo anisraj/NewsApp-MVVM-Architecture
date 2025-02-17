@@ -8,19 +8,19 @@ import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.data.api.NetworkService
 import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationContext
 import me.anisjamadar.newsapp_mvvm_architecture.di.BaseUrl
+import me.anisjamadar.newsapp_mvvm_architecture.di.LoggingClient
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import kotlin.math.log
 
-@Module
+@Module(includes = [ApplicationBindings::class])
 class ApplicationModule(private val application: NewsApplication) {
 
     @ApplicationContext
     @Provides
-    fun providesContext(): Context {
+    fun provideContext(): Context {
         return application
     }
 
@@ -34,19 +34,26 @@ class ApplicationModule(private val application: NewsApplication) {
 
     @Provides
     @Singleton
-    fun provideNetworkService(
-        @BaseUrl baseUrl: String,
-        gsonConverterFactory: GsonConverterFactory
-    ): NetworkService {
+    @LoggingClient
+    fun provideLoggingClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor { m -> Log.d("okhttp", m) }
         logger.level = HttpLoggingInterceptor.Level.BODY
-        val client = OkHttpClient
+        return OkHttpClient
             .Builder()
             .addInterceptor(logger)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNetworkService(
+        @BaseUrl baseUrl: String,
+        gsonConverterFactory: GsonConverterFactory,
+        @LoggingClient loggingClient: OkHttpClient
+    ): NetworkService {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(client)
+            .client(loggingClient)
             .addConverterFactory(gsonConverterFactory)
             .build()
             .create(NetworkService::class.java)
