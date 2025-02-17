@@ -2,6 +2,7 @@ package me.anisjamadar.newsapp_mvvm_architecture
 
 import android.app.Application
 import me.anisjamadar.newsapp_mvvm_architecture.di.component.ApplicationComponent
+import me.anisjamadar.newsapp_mvvm_architecture.di.component.DaggerActivityComponent
 import me.anisjamadar.newsapp_mvvm_architecture.di.component.DaggerApplicationComponent
 import me.anisjamadar.newsapp_mvvm_architecture.di.module.ApplicationModule
 
@@ -16,12 +17,9 @@ class NewsApplication : Application() {
 
     private fun injectDependencies() {
         applicationComponent = DaggerApplicationComponent
-            .builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
-            .apply {
+            .factory()
+            .create(this).apply {
                 inject(this@NewsApplication)
             }
-
     }
 }
