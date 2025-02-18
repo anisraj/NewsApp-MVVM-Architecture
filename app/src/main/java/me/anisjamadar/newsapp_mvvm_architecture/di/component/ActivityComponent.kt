@@ -2,25 +2,23 @@ package me.anisjamadar.newsapp_mvvm_architecture.di.component
 
 import androidx.appcompat.app.AppCompatActivity
 import dagger.BindsInstance
-import dagger.Component
+import dagger.Subcomponent
 import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines.TopHeadlinesActivity
 import me.anisjamadar.newsapp_mvvm_architecture.di.ActivityScope
 import me.anisjamadar.newsapp_mvvm_architecture.di.module.ActivityModule
 
 @ActivityScope
-@Component(
-    dependencies = [ApplicationComponent::class],
+@Subcomponent(
     modules = [ActivityModule::class]
 )
 interface ActivityComponent {
 
     fun inject(activity: TopHeadlinesActivity)
 
-    @Component.Factory
+    @Subcomponent.Factory
     interface Factory {
         fun create(
-            @BindsInstance activity: AppCompatActivity,
-            applicationComponent: ApplicationComponent
+            @BindsInstance activity: AppCompatActivity
         ): ActivityComponent
     }
 }

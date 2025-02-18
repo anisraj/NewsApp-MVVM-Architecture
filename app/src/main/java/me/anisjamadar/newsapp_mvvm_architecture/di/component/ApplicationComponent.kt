@@ -13,9 +13,9 @@ import me.anisjamadar.newsapp_mvvm_architecture.di.module.ApplicationModule
 ])
 interface ApplicationComponent {
 
-    fun inject(application: NewsApplication)
+    fun activityComponentFactory(): ActivityComponent.Factory
 
-    fun getNewsRepository(): NewsRepository
+    fun inject(application: NewsApplication)
 
     @Component.Factory
     interface Factory {

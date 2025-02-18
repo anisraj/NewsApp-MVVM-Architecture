@@ -14,8 +14,6 @@ import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlinesBinding
-import me.anisjamadar.newsapp_mvvm_architecture.di.component.DaggerActivityComponent
-import me.anisjamadar.newsapp_mvvm_architecture.di.module.ActivityModule
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import javax.inject.Inject
 import javax.inject.Provider
@@ -83,9 +81,9 @@ class TopHeadlinesActivity : AppCompatActivity() {
     }
 
     private fun injectDependencies() {
-       DaggerActivityComponent
-           .factory()
-           .create(this, (application as NewsApplication).applicationComponent)
-           .inject(this)
+        (application as NewsApplication).applicationComponent
+            .activityComponentFactory()
+            .create(this)
+            .inject(this)
     }
 }
