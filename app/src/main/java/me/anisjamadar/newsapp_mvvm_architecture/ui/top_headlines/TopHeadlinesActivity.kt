@@ -1,6 +1,7 @@
 package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,11 +18,15 @@ import me.anisjamadar.newsapp_mvvm_architecture.di.component.DaggerActivityCompo
 import me.anisjamadar.newsapp_mvvm_architecture.di.module.ActivityModule
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import javax.inject.Inject
+import javax.inject.Provider
 
 class TopHeadlinesActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adapter: TopHeadlineAdapter
+
+    @Inject
+    lateinit var randomProvider: Provider<Int>
 
     @Inject
     lateinit var newsViewModel: TopHeadlineViewModel
@@ -35,6 +40,9 @@ class TopHeadlinesActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpList()
         setUpObserver()
+        repeat(5) {
+            Log.d("Random", "onCreate: ${randomProvider.get()}")
+        }
     }
 
     private fun setUpList() {
