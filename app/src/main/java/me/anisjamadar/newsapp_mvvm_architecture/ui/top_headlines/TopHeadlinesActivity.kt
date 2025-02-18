@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
+import me.anisjamadar.newsapp_mvvm_architecture.data.DummyLargeLoad
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlinesBinding
 import me.anisjamadar.newsapp_mvvm_architecture.di.component.DaggerActivityComponent
@@ -22,6 +23,9 @@ class TopHeadlinesActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adapter: TopHeadlineAdapter
+
+    @Inject
+    lateinit var dummy: dagger.Lazy<DummyLargeLoad>
 
     @Inject
     lateinit var newsViewModel: TopHeadlineViewModel

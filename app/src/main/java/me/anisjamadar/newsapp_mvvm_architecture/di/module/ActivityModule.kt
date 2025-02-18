@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import dagger.Module
 import dagger.Provides
+import me.anisjamadar.newsapp_mvvm_architecture.data.DummyLargeLoad
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepositoryImpl
 import me.anisjamadar.newsapp_mvvm_architecture.di.ActivityContext
@@ -29,6 +30,11 @@ class ActivityModule(private val activity: AppCompatActivity) {
             ViewModelProviderFactory(TopHeadlineViewModel::class) {
                 TopHeadlineViewModel(newsRepository)
             })[TopHeadlineViewModel::class.java]
+    }
+
+    @Provides
+    fun provideDummyLargeLoad(): DummyLargeLoad {
+        return DummyLargeLoad()
     }
 
 }
