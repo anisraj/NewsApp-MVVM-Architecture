@@ -83,11 +83,9 @@ class TopHeadlinesActivity : AppCompatActivity() {
     }
 
     private fun injectDependencies() {
-        DaggerActivityComponent
-            .builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this))
-            .build()
-            .inject(this)
+       DaggerActivityComponent
+           .factory()
+           .create(this, (application as NewsApplication).applicationComponent)
+           .inject(this)
     }
 }

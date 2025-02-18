@@ -1,5 +1,7 @@
 package me.anisjamadar.newsapp_mvvm_architecture.di.component
 
+import androidx.appcompat.app.AppCompatActivity
+import dagger.BindsInstance
 import dagger.Component
 import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines.TopHeadlinesActivity
 import me.anisjamadar.newsapp_mvvm_architecture.di.ActivityScope
@@ -13,4 +15,12 @@ import me.anisjamadar.newsapp_mvvm_architecture.di.module.ActivityModule
 interface ActivityComponent {
 
     fun inject(activity: TopHeadlinesActivity)
+
+    @Component.Factory
+    interface Factory {
+        fun create(
+            @BindsInstance activity: AppCompatActivity,
+            applicationComponent: ApplicationComponent
+        ): ActivityComponent
+    }
 }
