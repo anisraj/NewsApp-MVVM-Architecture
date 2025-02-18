@@ -26,9 +26,6 @@ class TopHeadlinesActivity : AppCompatActivity() {
     lateinit var adapter: TopHeadlineAdapter
 
     @Inject
-    lateinit var randomProvider: Provider<Int>
-
-    @Inject
     lateinit var newsViewModel: TopHeadlineViewModel
 
     private lateinit var binding: ActivityTopHeadlinesBinding
@@ -40,9 +37,6 @@ class TopHeadlinesActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpList()
         setUpObserver()
-        repeat(5) {
-            Log.d("Random", "onCreate: ${randomProvider.get()}")
-        }
     }
 
     private fun setUpList() {
