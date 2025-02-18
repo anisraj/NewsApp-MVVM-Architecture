@@ -7,13 +7,13 @@ import dagger.Provides
 import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.data.api.NetworkService
 import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationContext
+import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import me.anisjamadar.newsapp_mvvm_architecture.di.BaseUrl
 import me.anisjamadar.newsapp_mvvm_architecture.di.LoggingClient
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module(includes = [ApplicationBindings::class])
 class ApplicationModule {
@@ -29,11 +29,11 @@ class ApplicationModule {
     fun provideBaseUrl(): String = "https://newsapi.org/v2/"
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
-    @Singleton
+    @ApplicationScope
     @LoggingClient
     fun provideLoggingClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor { m -> Log.d("okhttp", m) }
@@ -45,7 +45,7 @@ class ApplicationModule {
     }
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideNetworkService(
         @BaseUrl baseUrl: String,
         gsonConverterFactory: GsonConverterFactory,

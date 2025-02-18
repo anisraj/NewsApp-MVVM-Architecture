@@ -5,10 +5,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import me.anisjamadar.newsapp_mvvm_architecture.data.api.NetworkService
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
+import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@ApplicationScope
 class NewsRepositoryImpl @Inject constructor(
     private val networkService: NetworkService
 ) : NewsRepository {
