@@ -11,8 +11,9 @@ import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepositoryImpl
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import me.anisjamadar.newsapp_mvvm_architecture.utils.AppConstant.COUNTRY
+import javax.inject.Inject
 
-class TopHeadlineViewModel(
+class TopHeadlineViewModel @Inject constructor(
     private val newsRepository: NewsRepository
 ) : ViewModel() {
 

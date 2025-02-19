@@ -1,11 +1,11 @@
 package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,7 +16,6 @@ import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlinesBinding
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import javax.inject.Inject
-import javax.inject.Provider
 
 class TopHeadlinesActivity : AppCompatActivity() {
 
@@ -24,14 +23,16 @@ class TopHeadlinesActivity : AppCompatActivity() {
     lateinit var adapter: TopHeadlineAdapter
 
     @Inject
-    lateinit var newsViewModel: TopHeadlineViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var binding: ActivityTopHeadlinesBinding
+    private lateinit var newsViewModel: TopHeadlineViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlinesBinding.inflate(layoutInflater)
+        newsViewModel = ViewModelProvider(this, viewModelFactory)[TopHeadlineViewModel::class]
         setContentView(binding.root)
         setUpList()
         setUpObserver()
