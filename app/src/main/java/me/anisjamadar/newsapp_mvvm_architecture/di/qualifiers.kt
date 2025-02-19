@@ -16,4 +16,12 @@ annotation class BaseUrl
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class LoggingClient
+annotation class BaseClient
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class LoggingInterceptor
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ApiInterceptor

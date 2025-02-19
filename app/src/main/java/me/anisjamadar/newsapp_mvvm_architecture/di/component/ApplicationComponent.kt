@@ -6,12 +6,14 @@ import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
 import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import me.anisjamadar.newsapp_mvvm_architecture.di.module.ApplicationModule
+import me.anisjamadar.newsapp_mvvm_architecture.di.module.DataModule
 import me.anisjamadar.newsapp_mvvm_architecture.di.module.ViewModelModule
 
 @ApplicationScope
 @Component(modules = [
     ApplicationModule::class,
-    ViewModelModule::class
+    ViewModelModule::class,
+    DataModule::class
 ])
 interface ApplicationComponent {
 
