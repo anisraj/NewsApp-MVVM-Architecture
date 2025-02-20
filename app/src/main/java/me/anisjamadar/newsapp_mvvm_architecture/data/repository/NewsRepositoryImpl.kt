@@ -14,7 +14,7 @@ class NewsRepositoryImpl @Inject constructor(
 ) : NewsRepository {
     override fun getTopHeadlines(country: String): Flow<List<Article>> {
         return flow {
-            emit(networkService.getTopHeadlines(country))
+            emit(networkService.getTopHeadlines(country, 0))
         }.map {
             it.articles
         }

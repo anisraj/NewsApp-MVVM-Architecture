@@ -76,4 +76,7 @@ dependencies {
     implementation(libs.viewmodel.ktx)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
+
+    //paging
+    implementation(libs.paging)
 }

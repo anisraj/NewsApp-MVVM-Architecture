@@ -1,12 +1,18 @@
 package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
+import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsPagingSource
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepositoryImpl
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
@@ -14,24 +20,13 @@ import me.anisjamadar.newsapp_mvvm_architecture.utils.AppConstant.COUNTRY
 import javax.inject.Inject
 
 class TopHeadlineViewModel @Inject constructor(
-    private val newsRepository: NewsRepository
+    private val pagingSource: NewsPagingSource
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
-    val uiState = _uiState.asStateFlow()
-
-    init {
-        fetchNews()
-    }
-
-    private fun fetchNews() {
-        viewModelScope.launch {
-            newsRepository.getTopHeadlines(COUNTRY)
-                .catch {
-                    _uiState.value = UiState.Error(it.toString())
-                }.collect {
-                    _uiState.value = UiState.Success(it)
-                }
-        }
-    }
+    val flow = Pager(
+        PagingConfig(pageSize = 5)
+    ) {
+        pagingSource
+    }.flow
+        .cachedIn(viewModelScope)
 }

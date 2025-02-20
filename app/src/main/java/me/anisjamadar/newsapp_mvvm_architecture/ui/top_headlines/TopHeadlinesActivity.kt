@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
@@ -53,32 +54,11 @@ class TopHeadlinesActivity : AppCompatActivity() {
     private fun setUpObserver() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                newsViewModel.uiState.collect {
-                    when (it) {
-                        is UiState.Success -> {
-                            binding.progressBar.visibility = View.GONE
-                            renderList(it.data)
-                            binding.recyclerView.visibility = View.VISIBLE
-                        }
-                        is UiState.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                            binding.recyclerView.visibility = View.GONE
-                        }
-                        is UiState.Error -> {
-                            //Handle Error
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@TopHeadlinesActivity, it.message, Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
+                newsViewModel.flow.collectLatest { pagingData ->
+                    adapter.submitData(pagingData)
                 }
             }
         }
-    }
-
-    private fun renderList(articleList: List<Article>) {
-        adapter.addData(articleList)
-        adapter.notifyDataSetChanged()
     }
 
     private fun injectDependencies() {

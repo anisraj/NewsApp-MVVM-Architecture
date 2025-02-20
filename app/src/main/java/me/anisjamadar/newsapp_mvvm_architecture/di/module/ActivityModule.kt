@@ -20,8 +20,6 @@ class ActivityModule {
         return activity
     }
 
-    @ActivityScope
-    @Provides
-    fun providesTopHeadlineAdapter() = TopHeadlineAdapter(ArrayList())
+
 
 }

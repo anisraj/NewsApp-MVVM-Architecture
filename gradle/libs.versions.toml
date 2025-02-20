@@ -10,12 +10,13 @@ material = "1.12.0"
 activity = "1.10.0"
 constraintlayout = "2.2.0"
 dagger = "2.55"
-glide = "4.11.0"
+glide = "4.14.2"
 retrofit = "2.9.0"
 ksp = "2.0.21-1.0.27"
 room = "2.6.1"
 viewmodelKtx = "2.8.7"
 okhttpVersion = "4.10.0"
+paging = "3.3.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +38,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewmodelKtx" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
+paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
