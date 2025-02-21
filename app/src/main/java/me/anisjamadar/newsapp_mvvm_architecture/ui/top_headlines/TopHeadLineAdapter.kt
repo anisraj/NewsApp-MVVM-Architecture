@@ -13,7 +13,8 @@ import me.anisjamadar.newsapp_mvvm_architecture.di.ActivityScope
 import javax.inject.Inject
 
 @ActivityScope
-class TopHeadlineAdapter @Inject constructor() : PagingDataAdapter<Article, TopHeadlineAdapter.DataViewHolder>(COMPARATOR) {
+class TopHeadlineAdapter @Inject constructor()
+    : PagingDataAdapter<Article, TopHeadlineAdapter.DataViewHolder>(COMPARATOR) {
 
     class DataViewHolder(private val binding: LayoutHeadlineItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

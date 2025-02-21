@@ -54,8 +54,24 @@ class TopHeadlinesActivity : AppCompatActivity() {
     private fun setUpObserver() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                newsViewModel.flow.collectLatest { pagingData ->
-                    adapter.submitData(pagingData)
+                newsViewModel.uiState.collect {
+                    when (it) {
+                        is UiState.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            binding.recyclerView.visibility = View.VISIBLE
+                            adapter.submitData(it.data)
+                        }
+                        is UiState.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                            binding.recyclerView.visibility = View.GONE
+                        }
+                        is UiState.Error -> {
+                            //Handle Error
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(this@TopHeadlinesActivity, it.message, Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    }
                 }
             }
         }
