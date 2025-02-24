@@ -2,6 +2,7 @@ package me.anisjamadar.newsapp_mvvm_architecture.di.module
 
 import android.content.Context
 import android.util.Log
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import me.anisjamadar.newsapp_mvvm_architecture.BuildConfig
@@ -62,13 +63,13 @@ class ApplicationModule {
     @ApplicationScope
     @BaseClient
     fun provideBaseClient(
-        @LoggingInterceptor loggingInterceptor: Interceptor,
+        @LoggingInterceptor loggingInterceptor: Lazy<Interceptor>,
         @ApiInterceptor apiInterceptor: Interceptor
     ): OkHttpClient {
         val builder = OkHttpClient.Builder().apply {
             addInterceptor(apiInterceptor)
             if (BuildConfig.DEBUG) {
-                addInterceptor(loggingInterceptor)
+                addInterceptor(loggingInterceptor.get())
             }
         }
         return builder.build()

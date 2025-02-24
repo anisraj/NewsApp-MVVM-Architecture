@@ -2,7 +2,6 @@ package me.anisjamadar.newsapp_mvvm_architecture.data.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import kotlinx.coroutines.delay
 import me.anisjamadar.newsapp_mvvm_architecture.data.api.NetworkService
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
@@ -29,7 +28,7 @@ class NewsPagingSource @Inject constructor(
                 ) null else position + 1
             )
         } catch (e: Exception) {
-            LoadResult.Error(e)
+            return LoadResult.Error(e)
         }
 
     }

@@ -8,7 +8,6 @@ import androidx.paging.cachedIn
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
@@ -31,6 +30,7 @@ class TopHeadlineViewModel @Inject constructor(
         viewModelScope.launch {
             newsRepository
                 .getTopHeadlines(COUNTRY)
+                .cachedIn(viewModelScope)
                 .catch { e ->
                     Log.d("TAG", "got error: ${e.toString()}")
                     _uiState.value = UiState.Error(e.toString())

@@ -10,10 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
-import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlinesBinding
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import javax.inject.Inject

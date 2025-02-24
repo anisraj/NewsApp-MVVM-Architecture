@@ -19,9 +19,8 @@ class NewsRepositoryImpl @Inject constructor(
 ) : NewsRepository {
     override fun getTopHeadlines(country: String): Flow<PagingData<Article>> {
         return Pager(
-            PagingConfig(pageSize = 10)
-        ) {
-            pagingSource
-        }.flow
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = { pagingSource }
+        ).flow
     }
 }
