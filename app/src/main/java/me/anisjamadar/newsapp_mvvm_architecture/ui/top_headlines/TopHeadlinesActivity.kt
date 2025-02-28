@@ -1,0 +1,100 @@
+package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
+import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
+import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlinesBinding
+import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
+import javax.inject.Inject
+
+class TopHeadlinesActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var adapter: TopHeadlineAdapter
+
+    private lateinit var binding: ActivityTopHeadlinesBinding
+    private lateinit var viewModel: TopHeadlineViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        injectDependencies()
+        super.onCreate(savedInstanceState)
+        binding = ActivityTopHeadlinesBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this, viewModelFactory)[TopHeadlineViewModel::class]
+        setContentView(binding.root)
+        setUpList()
+        setUpObservers()
+    }
+
+    private fun setUpList() {
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                recyclerView.context,
+                (recyclerView.layoutManager as LinearLayoutManager).orientation
+            )
+        )
+        recyclerView.adapter = adapter
+    }
+
+    private fun setUpObservers() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    when (it) {
+                        is UiState.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            renderList(it.data)
+                            binding.recyclerView.visibility = View.VISIBLE
+                        }
+                        is UiState.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                            binding.recyclerView.visibility = View.GONE
+                        }
+                        is UiState.Error -> {
+                            //Handle Error
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(this@TopHeadlinesActivity, it.message, Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun renderList(articleList: List<Article>) {
+        adapter.addData(articleList)
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun injectDependencies() {
+        (application as NewsApplication).applicationComponent
+            .activityComponentFactory()
+            .create(this)
+            .inject(this)
+    }
+
+    companion object {
+        fun createIntent(context: Context): Intent {
+            return Intent(context, TopHeadlinesActivity::class.java)
+        }
+    }
+}

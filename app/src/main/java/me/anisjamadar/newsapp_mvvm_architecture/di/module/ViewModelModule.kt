@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import me.anisjamadar.newsapp_mvvm_architecture.di.ViewModelKey
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.ViewModelFactory
+import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines.TopHeadlineViewModel
 import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines_pagination.TopHeadlinePaginationViewModel
 
 @Module
@@ -15,7 +16,12 @@ interface ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(TopHeadlinePaginationViewModel::class)
-    fun bindTopHeadlineViewModel(topHeadlineViewModel: TopHeadlinePaginationViewModel): ViewModel
+    fun bindTopHeadlinePaginationViewModel(topHeadlineViewModel: TopHeadlinePaginationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TopHeadlineViewModel::class)
+    fun bindTopHeadlineViewModel(topHeadlineViewModel: TopHeadlineViewModel): ViewModel
 
     @Binds
     fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

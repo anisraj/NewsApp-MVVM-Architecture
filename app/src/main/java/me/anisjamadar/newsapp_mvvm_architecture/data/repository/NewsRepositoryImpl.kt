@@ -15,12 +15,21 @@ import javax.inject.Inject
 
 @ApplicationScope
 class NewsRepositoryImpl @Inject constructor(
-    private val pagingSource: NewsPagingSource
+    private val pagingSource: NewsPagingSource,
+    private val networkService: NetworkService
 ) : NewsRepository {
-    override fun getTopHeadlines(country: String): Flow<PagingData<Article>> {
+    override fun getTopHeadlinesByPagination(country: String): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = { pagingSource }
         ).flow
+    }
+
+    override fun getTopHeadlines(country: String): Flow<List<Article>> {
+        return flow {
+            emit(networkService.getTopHeadlines(country))
+        }.map {
+            it.articles
+        }
     }
 }

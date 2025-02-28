@@ -12,6 +12,6 @@ class TopHeadlinePaginationViewModel @Inject constructor(
 ) : ViewModel() {
 
     val pagingDataFlow = newsRepository
-        .getTopHeadlines(COUNTRY)
+        .getTopHeadlinesByPagination(COUNTRY)
         .cachedIn(viewModelScope)
 }

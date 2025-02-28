@@ -17,7 +17,7 @@ class NewsPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         return try {
             val position = params.key ?: 1
-            val response = networkService.getTopHeadlines(
+            val response = networkService.getTopHeadlinesByPagination(
                 COUNTRY,
                 page = position
             )

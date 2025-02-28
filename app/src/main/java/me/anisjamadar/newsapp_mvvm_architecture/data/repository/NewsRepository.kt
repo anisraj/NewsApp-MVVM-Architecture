@@ -5,5 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 
 interface NewsRepository {
-    fun getTopHeadlines(country: String): Flow<PagingData<Article>>
+    fun getTopHeadlinesByPagination(country: String): Flow<PagingData<Article>>
+
+    fun getTopHeadlines(country: String): Flow<List<Article>>
 }

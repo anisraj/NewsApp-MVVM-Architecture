@@ -6,6 +6,7 @@ import dagger.Subcomponent
 import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines_pagination.TopHeadlinesPaginationActivity
 import me.anisjamadar.newsapp_mvvm_architecture.di.ActivityScope
 import me.anisjamadar.newsapp_mvvm_architecture.di.module.ActivityModule
+import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines.TopHeadlinesActivity
 
 @ActivityScope
 @Subcomponent(
@@ -14,6 +15,8 @@ import me.anisjamadar.newsapp_mvvm_architecture.di.module.ActivityModule
 interface ActivityComponent {
 
     fun inject(activity: TopHeadlinesPaginationActivity)
+
+    fun inject(activity: TopHeadlinesActivity)
 
     @Subcomponent.Factory
     interface Factory {

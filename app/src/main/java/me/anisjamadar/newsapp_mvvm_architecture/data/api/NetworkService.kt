@@ -10,7 +10,10 @@ import retrofit2.http.Query
 interface NetworkService {
 
     @GET("top-headlines")
-    suspend fun getTopHeadlines(@Query("country") country: String,
+    suspend fun getTopHeadlinesByPagination(@Query("country") country: String,
                                 @Query("page") page: Int,
                                 @Query("pageSize") pageSize: Int = PAGE_SIZE): TopHeadlinesResponse
+
+    @GET("top-headlines")
+    suspend fun getTopHeadlines(@Query("country") country: String): TopHeadlinesResponse
 }

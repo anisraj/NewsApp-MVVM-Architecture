@@ -9,4 +9,5 @@
     <dimen name="DescTextPaddingVertical">16dp</dimen>
     <dimen name="CommonBgPaddingHorizontal">6dp</dimen>
     <dimen name="CommonBgPaddingVertical">6dp</dimen>
+    <dimen name="textsize_btn_large">16sp</dimen>
 </resources>

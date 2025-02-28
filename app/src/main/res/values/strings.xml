@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NewsApp-MVVM-Architecture</string>
+    <string name="top_headlines">Top Headlines</string>
+    <string name="top_headlines_pagination">Top Headlines by Pagination</string>
 </resources>

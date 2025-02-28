@@ -1,5 +1,7 @@
 package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines_pagination
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -20,7 +22,7 @@ import javax.inject.Inject
 class TopHeadlinesPaginationActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var adapter: TopHeadlineAdapter
+    lateinit var adapter: TopHeadLinePaginationAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -88,5 +90,11 @@ class TopHeadlinesPaginationActivity : AppCompatActivity() {
             .activityComponentFactory()
             .create(this)
             .inject(this)
+    }
+
+    companion object {
+        fun createIntent(context: Context): Intent {
+            return Intent(context, TopHeadlinesPaginationActivity::class.java)
+        }
     }
 }
