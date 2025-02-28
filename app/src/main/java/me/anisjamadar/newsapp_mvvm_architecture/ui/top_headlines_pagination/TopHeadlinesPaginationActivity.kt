@@ -1,4 +1,4 @@
-package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines
+package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines_pagination
 
 import android.os.Bundle
 import android.view.View
@@ -17,7 +17,7 @@ import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlinesBinding
 import javax.inject.Inject
 
-class TopHeadlinesActivity : AppCompatActivity() {
+class TopHeadlinesPaginationActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adapter: TopHeadlineAdapter
@@ -26,13 +26,13 @@ class TopHeadlinesActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var binding: ActivityTopHeadlinesBinding
-    private lateinit var newsViewModel: TopHeadlineViewModel
+    private lateinit var newsViewModel: TopHeadlinePaginationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlinesBinding.inflate(layoutInflater)
-        newsViewModel = ViewModelProvider(this, viewModelFactory)[TopHeadlineViewModel::class]
+        newsViewModel = ViewModelProvider(this, viewModelFactory)[TopHeadlinePaginationViewModel::class]
         setContentView(binding.root)
         setUpList()
         setUpObservers()
@@ -66,7 +66,7 @@ class TopHeadlinesActivity : AppCompatActivity() {
                         when (val refreshState = loadStates.refresh) {
                             is LoadState.Error -> {
                                 binding.progressBar.visibility = View.GONE
-                                Toast.makeText(this@TopHeadlinesActivity, "Error: ${refreshState.error.message}", Toast.LENGTH_LONG)
+                                Toast.makeText(this@TopHeadlinesPaginationActivity, "Error: ${refreshState.error.message}", Toast.LENGTH_LONG)
                                     .show()
                             }
                             is LoadState.Loading -> {

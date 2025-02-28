@@ -1,4 +1,4 @@
-package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines
+package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines_pagination
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
