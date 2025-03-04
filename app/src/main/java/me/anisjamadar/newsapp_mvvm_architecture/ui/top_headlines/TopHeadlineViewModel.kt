@@ -4,8 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
@@ -27,9 +30,9 @@ class TopHeadlineViewModel @Inject constructor(
     private fun fetchNews() {
         viewModelScope.launch {
             newsRepository.getTopHeadlines(COUNTRY)
-                .catch {
+                .onFailure {
                     _uiState.value = UiState.Error(it.toString())
-                }.collect {
+                }.onSuccess {
                     _uiState.value = UiState.Success(it)
                 }
         }

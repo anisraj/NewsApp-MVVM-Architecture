@@ -7,5 +7,5 @@ import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 interface NewsRepository {
     fun getTopHeadlinesByPagination(country: String): Flow<PagingData<Article>>
 
-    fun getTopHeadlines(country: String): Flow<List<Article>>
+    suspend fun getTopHeadlines(country: String): Result<List<Article>>
 }
