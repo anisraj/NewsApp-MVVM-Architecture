@@ -2,14 +2,16 @@ package me.anisjamadar.newsapp_mvvm_architecture.di.module
 
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepositoryImpl
-import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 interface ApplicationBindings {
     @Binds
-    @ApplicationScope
+    @Singleton
     fun bindNewsRepository(impl: NewsRepositoryImpl): NewsRepository
 }

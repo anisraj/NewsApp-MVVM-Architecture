@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
@@ -21,6 +22,7 @@ import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlines
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TopHeadlinesActivity : AppCompatActivity() {
 
     @Inject
@@ -33,7 +35,6 @@ class TopHeadlinesActivity : AppCompatActivity() {
     private lateinit var viewModel: TopHeadlineViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injectDependencies()
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlinesBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this, viewModelFactory)[TopHeadlineViewModel::class]
@@ -83,13 +84,6 @@ class TopHeadlinesActivity : AppCompatActivity() {
     private fun renderList(articleList: List<Article>) {
         adapter.addData(articleList)
         adapter.notifyDataSetChanged()
-    }
-
-    private fun injectDependencies() {
-        (application as NewsApplication).applicationComponent
-            .activityComponentFactory()
-            .create(this)
-            .inject(this)
     }
 
     companion object {

@@ -1,12 +1,12 @@
 package me.anisjamadar.newsapp_mvvm_architecture.data.api
 
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.TopHeadlinesResponse
-import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import me.anisjamadar.newsapp_mvvm_architecture.utils.AppConstant.PAGE_SIZE
 import retrofit2.http.GET
 import retrofit2.http.Query
+import javax.inject.Singleton
 
-@ApplicationScope
+@Singleton
 interface NetworkService {
 
     @GET("top-headlines")

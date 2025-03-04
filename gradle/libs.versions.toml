@@ -1,5 +1,5 @@
 [versions]
-agp = "8.8.1"
+agp = "8.8.2"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -7,13 +7,11 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.10.0"
-constraintlayout = "2.2.0"
-dagger = "2.55"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
+hilt = "2.51.1"
 glide = "4.14.2"
 retrofit = "2.9.0"
-ksp = "2.0.21-1.0.27"
-room = "2.6.1"
 viewmodelKtx = "2.8.7"
 okhttpVersion = "4.10.0"
 paging = "3.3.6"
@@ -27,14 +25,11 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger"}
-dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson-convertor = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
-room = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewmodelKtx" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
@@ -44,5 +39,5 @@ paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "pa
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
 

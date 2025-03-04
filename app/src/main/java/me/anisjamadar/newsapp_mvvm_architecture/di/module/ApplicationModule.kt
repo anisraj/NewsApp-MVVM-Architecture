@@ -1,18 +1,16 @@
 package me.anisjamadar.newsapp_mvvm_architecture.di.module
 
-import android.content.Context
 import android.util.Log
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import me.anisjamadar.newsapp_mvvm_architecture.BuildConfig
-import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.data.UserAgentProvider
 import me.anisjamadar.newsapp_mvvm_architecture.data.api.NetworkService
 import me.anisjamadar.newsapp_mvvm_architecture.data.api.NewsApiInterceptor
 import me.anisjamadar.newsapp_mvvm_architecture.di.ApiInterceptor
-import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationContext
-import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import me.anisjamadar.newsapp_mvvm_architecture.di.BaseClient
 import me.anisjamadar.newsapp_mvvm_architecture.di.BaseUrl
 import me.anisjamadar.newsapp_mvvm_architecture.di.LoggingInterceptor
@@ -21,26 +19,22 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module(includes = [ApplicationBindings::class])
+@InstallIn(SingletonComponent::class)
 class ApplicationModule {
-
-    @ApplicationContext
-    @Provides
-    fun provideContext(application: NewsApplication): Context {
-        return application
-    }
 
     @BaseUrl
     @Provides
     fun provideBaseUrl(): String = "https://newsapi.org/v2/"
 
     @Provides
-    @ApplicationScope
+    @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
-    @ApplicationScope
+    @Singleton
     @LoggingInterceptor
     fun provideLoggingInterceptor(): Interceptor {
         val logger = HttpLoggingInterceptor { m -> Log.d("okhttp", m) }
@@ -49,7 +43,7 @@ class ApplicationModule {
     }
 
     @Provides
-    @ApplicationScope
+    @Singleton
     @ApiInterceptor
     fun provideNewsApiInterceptor(
         userAgentProvider: UserAgentProvider
@@ -60,7 +54,7 @@ class ApplicationModule {
     }
 
     @Provides
-    @ApplicationScope
+    @Singleton
     @BaseClient
     fun provideBaseClient(
         @LoggingInterceptor loggingInterceptor: Lazy<Interceptor>,
@@ -76,7 +70,7 @@ class ApplicationModule {
     }
 
     @Provides
-    @ApplicationScope
+    @Singleton
     fun provideNetworkService(
         @BaseUrl baseUrl: String,
         gsonConverterFactory: GsonConverterFactory,

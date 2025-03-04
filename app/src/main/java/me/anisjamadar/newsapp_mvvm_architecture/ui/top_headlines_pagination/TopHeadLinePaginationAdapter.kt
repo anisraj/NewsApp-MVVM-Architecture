@@ -6,13 +6,13 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dagger.hilt.android.scopes.ActivityScoped
 import me.anisjamadar.newsapp_mvvm_architecture.R
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.databinding.LayoutHeadlineItemBinding
-import me.anisjamadar.newsapp_mvvm_architecture.di.ActivityScope
 import javax.inject.Inject
 
-@ActivityScope
+@ActivityScoped
 class TopHeadLinePaginationAdapter @Inject constructor()
     : PagingDataAdapter<Article, TopHeadLinePaginationAdapter.DataViewHolder>(COMPARATOR) {
 

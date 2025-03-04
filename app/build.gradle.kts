@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -57,9 +57,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    //dagger
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
+    //hilt
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 
     //glide
     implementation(libs.glide)
@@ -67,11 +67,6 @@ dependencies {
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson.convertor)
-
-    //room db
-    implementation(libs.room)
-    ksp(libs.room.compiler)
-    implementation(libs.room.ktx)
 
     //for viewmodel scope
     implementation(libs.viewmodel.ktx)

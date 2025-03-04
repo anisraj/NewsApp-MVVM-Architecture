@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import me.anisjamadar.newsapp_mvvm_architecture.di.ViewModelKey
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.ViewModelFactory
@@ -11,6 +13,7 @@ import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines.TopHeadlineView
 import me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines_pagination.TopHeadlinePaginationViewModel
 
 @Module
+@InstallIn(SingletonComponent::class)
 interface ViewModelModule {
 
     @Binds

@@ -2,25 +2,28 @@ package me.anisjamadar.newsapp_mvvm_architecture.di.module
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import me.anisjamadar.newsapp_mvvm_architecture.BuildConfig
 import me.anisjamadar.newsapp_mvvm_architecture.data.UserAgentProvider
-import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 object DataModule {
 
-    @ApplicationScope
+    @Singleton
     @Provides
     @Named("versionName")
     fun provideVersionName() = BuildConfig.VERSION_NAME
 
-    @ApplicationScope
+    @Singleton
     @Provides
     @Named("applicationId")
     fun provideApplicationId() = BuildConfig.APPLICATION_ID
 
-    @ApplicationScope
+    @Singleton
     @Provides
     fun provideUserAgentProvider(
         @Named("versionName") versionName: String,

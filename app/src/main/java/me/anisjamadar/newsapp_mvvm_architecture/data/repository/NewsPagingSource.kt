@@ -4,12 +4,12 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import me.anisjamadar.newsapp_mvvm_architecture.data.api.NetworkService
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
-import me.anisjamadar.newsapp_mvvm_architecture.di.ApplicationScope
 import me.anisjamadar.newsapp_mvvm_architecture.utils.AppConstant.COUNTRY
 import me.anisjamadar.newsapp_mvvm_architecture.utils.AppConstant.PAGE_SIZE
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@ApplicationScope
+@Singleton
 class NewsPagingSource @Inject constructor(
     private val networkService: NetworkService
 ) : PagingSource<Int, Article>() {
