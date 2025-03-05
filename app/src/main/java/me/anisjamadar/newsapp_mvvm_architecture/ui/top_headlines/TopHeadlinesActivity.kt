@@ -5,18 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import me.anisjamadar.newsapp_mvvm_architecture.NewsApplication
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.databinding.ActivityTopHeadlinesBinding
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
@@ -26,18 +23,14 @@ import javax.inject.Inject
 class TopHeadlinesActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    @Inject
     lateinit var adapter: TopHeadlineAdapter
 
     private lateinit var binding: ActivityTopHeadlinesBinding
-    private lateinit var viewModel: TopHeadlineViewModel
+    private val viewModel: TopHeadlineViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlinesBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this, viewModelFactory)[TopHeadlineViewModel::class]
         setContentView(binding.root)
         setUpList()
         setUpObservers()

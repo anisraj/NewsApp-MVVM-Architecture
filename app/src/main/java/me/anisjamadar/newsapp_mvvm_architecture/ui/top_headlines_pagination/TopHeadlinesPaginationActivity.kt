@@ -5,9 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
@@ -25,16 +25,12 @@ class TopHeadlinesPaginationActivity : AppCompatActivity() {
     @Inject
     lateinit var adapter: TopHeadLinePaginationAdapter
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private lateinit var binding: ActivityTopHeadlinesBinding
-    private lateinit var newsViewModel: TopHeadlinePaginationViewModel
+    private val newsViewModel: TopHeadlinePaginationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlinesBinding.inflate(layoutInflater)
-        newsViewModel = ViewModelProvider(this, viewModelFactory)[TopHeadlinePaginationViewModel::class]
         setContentView(binding.root)
         setUpList()
         setUpObservers()

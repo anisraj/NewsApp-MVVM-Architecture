@@ -2,13 +2,9 @@ package me.anisjamadar.newsapp_mvvm_architecture.ui.top_headlines
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.data.repository.NewsRepository
@@ -16,6 +12,7 @@ import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
 import me.anisjamadar.newsapp_mvvm_architecture.utils.AppConstant.COUNTRY
 import javax.inject.Inject
 
+@HiltViewModel
 class TopHeadlineViewModel @Inject constructor(
     private val newsRepository: NewsRepository
 ) : ViewModel() {
