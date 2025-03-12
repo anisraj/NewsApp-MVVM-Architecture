@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -39,30 +40,46 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
     buildFeatures {
-        viewBinding = true
+        compose = true
         buildConfig = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //compose
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.navigation.compose)
+    //for injecting viewmodel into compose functions
+    implementation(libs.hilt.navigation.compose)
+
+    //coil compose
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
+
     //hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
-
-    //glide
-    implementation(libs.glide)
 
     //retrofit
     implementation(libs.retrofit)
@@ -77,4 +94,7 @@ dependencies {
 
     //paging
     implementation(libs.paging)
+
+    //browser
+    implementation(libs.browser)
 }

@@ -1,35 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.NewsAppMVVMArchitecture" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
-    <style name="Theme.NewsAppMVVMArchitecture" parent="Base.Theme.NewsAppMVVMArchitecture" />
-
-    <style name="HeadLineText.cloudBurst.productSansBold" parent="ThemeOverlay.MaterialComponents.Light">
-        <item name="android:fontFamily">@font/product_sans_bold</item>
-        <item name="android:textColor">@color/cloudBurst</item>
-        <item name="android:textSize">@dimen/HeadLineTextSize</item>
-        <item name="android:textAlignment">viewStart</item>
-    </style>
-
-    <style name="DescText.white.productSansRegular" parent="ThemeOverlay.MaterialComponents.Light">
-        <item name="android:fontFamily">@font/product_sans_regular</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/DescTextSize</item>
-        <item name="android:textAlignment">viewStart</item>
-    </style>
-
-    <style name="CommonInfoText.darkViolet.productSansRegular" parent="ThemeOverlay.MaterialComponents.Light">
-        <item name="android:fontFamily">@font/product_sans_regular</item>
-        <item name="android:textColor">@color/darkViolet</item>
-        <item name="android:textSize">@dimen/CommonInfoTextSize</item>
-        <item name="android:textAlignment">viewStart</item>
-    </style>
-
-    <style name="BtnLarge">
-        <item name="android:textSize">@dimen/textsize_btn_large</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
+    <style name="Theme.NewsAppMVVMArchitecture" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
