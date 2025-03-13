@@ -44,12 +44,19 @@ fun NewsNavHost() {
                         .Builder()
                         .build()
                         .launchUrl(context, Uri.parse(it))
+                },
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
 
         composable(route = Route.TopHeadlineByPagination.name) {
-            TopHeadlineScreenByPagination()
+            TopHeadlineScreenByPagination(
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

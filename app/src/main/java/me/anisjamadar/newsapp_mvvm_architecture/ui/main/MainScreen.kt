@@ -5,16 +5,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.anisjamadar.newsapp_mvvm_architecture.R
-import me.anisjamadar.newsapp_mvvm_architecture.ui.base.MyCustomTopAppBar
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.primaryLight
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     onTopHeadlineClick: () -> Unit,
@@ -22,9 +27,15 @@ fun MainScreen(
 ) {
     Scaffold(
         topBar = {
-            MyCustomTopAppBar(title = {
-                Text(text = "Home")
-            })
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = primaryLight,
+                    titleContentColor = Color.White
+                ),
+                title = {
+                    Text("Home")
+                }
+            )
         }
     ) { padding ->
         Column(

@@ -55,25 +55,3 @@ fun ShowError(errorMessage: String) {
         )
     }
 }
-
-@Composable
-fun MyCustomTopAppBar(
-    title: @Composable () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        CompositionLocalProvider(
-            value = LocalTextStyle provides LocalTextStyle.current.copy(
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                fontSize = 28.sp
-            )
-        ) {
-            title()
-        }
-    }
-}

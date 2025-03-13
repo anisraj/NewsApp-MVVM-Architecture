@@ -7,14 +7,22 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -23,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,7 +41,6 @@ import coil3.compose.AsyncImage
 import me.anisjamadar.newsapp_mvvm_architecture.R
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Article
 import me.anisjamadar.newsapp_mvvm_architecture.data.model.Source
-import me.anisjamadar.newsapp_mvvm_architecture.ui.base.MyCustomTopAppBar
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.ShowError
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.ShowLoading
 import me.anisjamadar.newsapp_mvvm_architecture.ui.base.UiState
@@ -41,18 +49,39 @@ import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.primaryLight
 import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.surfaceDark
 import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.surfaceLight
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopHeadlineScreen(
-    onNewsClick: (url: String) -> Unit
+    onNewsClick: (url: String) -> Unit,
+    onBackClick: () -> Unit,
 ) {
     val viewModel = hiltViewModel<TopHeadlineViewModel>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
-            MyCustomTopAppBar(title = {
-                Text(stringResource(R.string.top_headlines))
-            })
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = primaryLight,
+                    titleContentColor = Color.White
+                ),
+                title = {
+                    Text(stringResource(R.string.top_headlines))
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            onBackClick.invoke()
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back button",
+                            tint = Color.White
+                        )
+                    }
+                }
+            )
         }
     ) { padding ->
         Column(
@@ -116,6 +145,11 @@ fun ArticleLayout(article: Article, onNewsClick: (url: String) -> Unit) {
     ) {
         NewsTitle(article)
         Row(
+            horizontalArrangement = Arrangement.spacedBy(
+                space = 5.dp,
+                alignment = Alignment.CenterHorizontally
+            ),
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .background(Color(0xFFF4F5FD))
                 .padding(10.dp)
@@ -147,6 +181,7 @@ fun NewsTitle(article: Article) {
             .background(surfaceLight)
             .padding(10.dp),
         maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
         fontSize = 17.sp,
         color = primaryLight
     )
@@ -159,7 +194,7 @@ fun BannerImage(article: Article) {
         contentDescription = article.title,
         contentScale = ContentScale.Crop,
         modifier = Modifier
-            .height(100.dp)
+            .height(120.dp)
             .fillMaxWidth(0.5f)
     )
 }
@@ -176,6 +211,7 @@ fun NewsDescription(article: Article) {
             .background(surfaceDark)
             .padding(16.dp),
         maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
         fontSize = 14.sp
     )
 }
@@ -192,6 +228,7 @@ fun NewsSource(article: Article) {
             .background(Color(0XFFEACEF7))
             .padding(6.dp),
         maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
         fontSize = 10.sp
     )
 }
