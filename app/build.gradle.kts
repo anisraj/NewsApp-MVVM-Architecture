@@ -94,6 +94,7 @@ dependencies {
 
     //paging
     implementation(libs.paging)
+    implementation(libs.paging.compose)
 
     //browser
     implementation(libs.browser)

@@ -1,5 +1,6 @@
 package me.anisjamadar.newsapp_mvvm_architecture.ui.base
 
+import android.content.Context
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.runtime.Composable
@@ -40,10 +41,7 @@ fun NewsNavHost() {
         composable(route = Route.TopHeadline.name) {
             TopHeadlineScreen(
                 onNewsClick = {
-                    CustomTabsIntent
-                        .Builder()
-                        .build()
-                        .launchUrl(context, Uri.parse(it))
+                    openChromeTab(context, it)
                 },
                 onBackClick = {
                     navController.popBackStack()
@@ -55,8 +53,18 @@ fun NewsNavHost() {
             TopHeadlineScreenByPagination(
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onNewsClick = {
+                    openChromeTab(context, it)
                 }
             )
         }
     }
+}
+
+fun openChromeTab(context: Context, url: String) {
+    CustomTabsIntent
+        .Builder()
+        .build()
+        .launchUrl(context, Uri.parse(url))
 }
