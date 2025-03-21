@@ -21,3 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "NewsApp-MVVM-Architecture"
 include(":app")
+include(":utils")
+include(":presentation")
+include(":data")
+include(":domain")
