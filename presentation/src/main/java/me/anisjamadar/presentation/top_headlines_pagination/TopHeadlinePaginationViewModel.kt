@@ -4,16 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
-import me.anisjamadar.domain.repository.NewsRepository
+import me.anisjamadar.domain.usecase.TopHeadlineUseCase
 import me.anisjamadar.util.AppConstant.COUNTRY
 import javax.inject.Inject
 
 @HiltViewModel
 class TopHeadlinePaginationViewModel @Inject constructor(
-    newsRepository: NewsRepository
+    useCase: TopHeadlineUseCase
 ) : ViewModel() {
 
-    val pagingDataFlow = newsRepository
+    val pagingDataFlow = useCase
         .getTopHeadlinesByPagination(COUNTRY)
         .cachedIn(viewModelScope)
 }
