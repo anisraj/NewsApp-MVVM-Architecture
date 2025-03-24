@@ -38,7 +38,6 @@ android {
 dependencies {
 
     implementation(project(":domain"))
-    implementation(project(":data"))
     implementation(project(":utils"))
 
     implementation(libs.androidx.core.ktx)
@@ -73,9 +72,6 @@ dependencies {
     //hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
-
-    //browser
-    implementation(libs.browser)
 
     //paging
     implementation(libs.paging)

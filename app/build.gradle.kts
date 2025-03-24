@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -35,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -42,8 +46,17 @@ android {
 
 dependencies {
     implementation(project(":presentation"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.androidx.material3)
 
     //hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+
+    //browser
+    implementation(libs.browser)
 }

@@ -1,4 +1,4 @@
-package me.anisjamadar.presentation.base
+package me.anisjamadar.newsapp_mvvm_architecture.navigation
 
 import android.content.Context
 import android.net.Uri
@@ -8,7 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.anisjamadar.presentation.main.MainScreen
+import me.anisjamadar.newsapp_mvvm_architecture.main.MainScreen
 import me.anisjamadar.presentation.top_headlines.TopHeadlineScreen
 import me.anisjamadar.presentation.top_headlines_pagination.TopHeadlineScreenByPagination
 

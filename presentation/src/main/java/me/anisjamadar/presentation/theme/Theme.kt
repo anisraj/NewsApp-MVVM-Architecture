@@ -1,4 +1,4 @@
-package me.anisjamadar.newsapp_mvvm_architecture.ui.theme
+package me.anisjamadar.newsapp_mvvm_architecture.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,6 +14,14 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.onSecondaryLight
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.onSurfaceDark
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.onSurfaceLight
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.primaryDark
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.primaryLight
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.secondaryLight
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.surfaceDark
+import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.surfaceLight
 import me.anisjamadar.presentation.theme.Typography
 
 private val lightScheme = lightColorScheme(

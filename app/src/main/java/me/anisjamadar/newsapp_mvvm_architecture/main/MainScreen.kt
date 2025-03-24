@@ -1,4 +1,4 @@
-package me.anisjamadar.presentation.main
+package me.anisjamadar.newsapp_mvvm_architecture.main
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,11 +1,11 @@
-package me.anisjamadar.presentation.main
+package me.anisjamadar.newsapp_mvvm_architecture.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import dagger.hilt.android.AndroidEntryPoint
-import me.anisjamadar.newsapp_mvvm_architecture.ui.theme.NewsAppTheme
-import me.anisjamadar.presentation.base.NewsNavHost
+import me.anisjamadar.newsapp_mvvm_architecture.navigation.NewsNavHost
+import me.anisjamadar.newsapp_mvvm_architecture.theme.NewsAppTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

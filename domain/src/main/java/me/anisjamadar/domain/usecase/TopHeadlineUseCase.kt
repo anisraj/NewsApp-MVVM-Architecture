@@ -4,11 +4,8 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import me.anisjamadar.domain.model.Article
 import me.anisjamadar.domain.repository.NewsRepository
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class TopHeadlineUseCase @Inject constructor(
+class TopHeadlineUseCase(
     private val newsRepository: NewsRepository
 ) {
     suspend fun getTopHeadlines(country: String): Result<List<Article>> {
