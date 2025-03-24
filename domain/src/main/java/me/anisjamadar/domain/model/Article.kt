@@ -1,7 +1,6 @@
 package me.anisjamadar.domain.model
 
 import com.google.gson.annotations.SerializedName
-import me.anisjamadar.domain.model.Source
 
 data class Article(
     @SerializedName("title")

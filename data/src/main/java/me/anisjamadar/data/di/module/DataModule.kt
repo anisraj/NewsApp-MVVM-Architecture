@@ -1,8 +1,10 @@
 package me.anisjamadar.data.di.module
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import me.anisjamadar.data.BuildConfig
 import me.anisjamadar.data.UserAgentProvider
@@ -16,12 +18,16 @@ object DataModule {
     @Singleton
     @Provides
     @Named("versionName")
-    fun provideVersionName() = "1.0"
+    fun provideVersionName(@ApplicationContext context: Context): String {
+        return context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0"
+    }
 
     @Singleton
     @Provides
     @Named("applicationId")
-    fun provideApplicationId() = "me.anisjamadar.newsapp_mvvm_architecture"
+    fun provideApplicationId(@ApplicationContext context: Context): String {
+        return context.packageName
+    }
 
     @Singleton
     @Provides
