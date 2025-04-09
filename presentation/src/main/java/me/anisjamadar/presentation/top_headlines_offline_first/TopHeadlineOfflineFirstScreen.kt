@@ -21,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -68,9 +69,16 @@ fun TopHeadlineOfflineFirstScreen(
         viewModel.updateData()
     }
 
+    val retryLabel = stringResource(R.string.retry)
     LaunchedEffect(Unit) {
         viewModel.errorSignal.collect {
-            snackBarHostState.showSnackbar(it.localizedMessage ?: "Some Error")
+            val snackBarResult = snackBarHostState.showSnackbar(
+                message = it.localizedMessage ?: "Some Error",
+                actionLabel = retryLabel
+            )
+            if (snackBarResult == SnackbarResult.ActionPerformed) {
+                viewModel.updateData()
+            }
         }
     }
 
