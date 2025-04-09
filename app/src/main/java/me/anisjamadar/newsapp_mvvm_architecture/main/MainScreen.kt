@@ -23,7 +23,8 @@ import me.anisjamadar.presentation.R
 @Composable
 fun MainScreen(
     onTopHeadlineClick: () -> Unit,
-    onTopHeadlineByPaginationClick: () -> Unit
+    onTopHeadlineByPaginationClick: () -> Unit,
+    onTopHeadlineOfflineFirstClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -65,6 +66,16 @@ fun MainScreen(
             ) {
                 Text(
                     text = stringResource(R.string.top_headlines_pagination)
+                )
+            }
+
+            Button(
+                onClick = {
+                    onTopHeadlineOfflineFirstClick.invoke()
+                }
+            ) {
+                Text(
+                    text = stringResource(R.string.top_headlines_offline_first)
                 )
             }
         }

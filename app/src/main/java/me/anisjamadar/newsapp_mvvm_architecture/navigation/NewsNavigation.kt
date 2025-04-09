@@ -10,12 +10,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import me.anisjamadar.newsapp_mvvm_architecture.main.MainScreen
 import me.anisjamadar.presentation.top_headlines.TopHeadlineScreen
+import me.anisjamadar.presentation.top_headlines_offline_first.TopHeadlineOfflineFirstScreen
 import me.anisjamadar.presentation.top_headlines_pagination.TopHeadlineScreenByPagination
 
 sealed class Route(val name: String) {
     data object Main : Route("main")
     data object TopHeadline : Route("top_headline")
     data object TopHeadlineByPagination : Route("top_headline_by_pagination")
+    data object TopHeadlineOfflineFirst : Route("top_headline_offline_first")
 }
 
 @Composable
@@ -34,6 +36,9 @@ fun NewsNavHost() {
                 },
                 onTopHeadlineByPaginationClick = {
                     navController.navigate(Route.TopHeadlineByPagination.name)
+                },
+                onTopHeadlineOfflineFirstClick = {
+                    navController.navigate(Route.TopHeadlineOfflineFirst.name)
                 }
             )
         }
@@ -51,6 +56,17 @@ fun NewsNavHost() {
 
         composable(route = Route.TopHeadlineByPagination.name) {
             TopHeadlineScreenByPagination(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onNewsClick = {
+                    openChromeTab(context, it)
+                }
+            )
+        }
+
+        composable(route = Route.TopHeadlineOfflineFirst.name) {
+            TopHeadlineOfflineFirstScreen(
                 onBackClick = {
                     navController.popBackStack()
                 },

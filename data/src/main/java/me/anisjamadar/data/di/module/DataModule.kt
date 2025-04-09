@@ -8,6 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import me.anisjamadar.data.BuildConfig
 import me.anisjamadar.data.UserAgentProvider
+import me.anisjamadar.data.di.DatabaseName
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -36,5 +37,12 @@ object DataModule {
         @Named("applicationId") applicationId: String
     ): UserAgentProvider {
         return UserAgentProvider(versionName, applicationId)
+    }
+
+    @Singleton
+    @Provides
+    @DatabaseName
+    fun provideDatabaseName(): String {
+        return "news-database"
     }
 }

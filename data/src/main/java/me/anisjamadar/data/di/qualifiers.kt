@@ -17,3 +17,7 @@ annotation class LoggingInterceptor
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ApiInterceptor
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class DatabaseName

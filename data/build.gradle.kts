@@ -60,4 +60,9 @@ dependencies {
 
     //paging
     implementation(libs.paging)
+
+    //room
+    implementation(libs.room)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
 }
