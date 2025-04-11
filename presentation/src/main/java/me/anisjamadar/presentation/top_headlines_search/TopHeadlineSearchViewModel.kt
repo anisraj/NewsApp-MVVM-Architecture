@@ -37,7 +37,11 @@ class TopHeadlineSearchViewModel @Inject constructor(
     }
 
     fun onQueryChange(query: String) {
-        _query.value = query
+        if (query.isEmpty()) {
+            _query.value = "US news"
+        } else {
+            _query.value = query
+        }
     }
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
