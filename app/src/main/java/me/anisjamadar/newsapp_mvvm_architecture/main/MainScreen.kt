@@ -25,6 +25,7 @@ fun MainScreen(
     onTopHeadlineClick: () -> Unit,
     onTopHeadlineByPaginationClick: () -> Unit,
     onTopHeadlineOfflineFirstClick: () -> Unit,
+    onSearchTopHeadlineClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -76,6 +77,16 @@ fun MainScreen(
             ) {
                 Text(
                     text = stringResource(R.string.top_headlines_offline_first)
+                )
+            }
+
+            Button(
+                onClick = {
+                    onSearchTopHeadlineClick.invoke()
+                }
+            ) {
+                Text(
+                    text = stringResource(R.string.search_top_headlines)
                 )
             }
         }

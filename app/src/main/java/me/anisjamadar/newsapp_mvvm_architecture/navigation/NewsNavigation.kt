@@ -12,12 +12,14 @@ import me.anisjamadar.newsapp_mvvm_architecture.main.MainScreen
 import me.anisjamadar.presentation.top_headlines.TopHeadlineScreen
 import me.anisjamadar.presentation.top_headlines_offline_first.TopHeadlineOfflineFirstScreen
 import me.anisjamadar.presentation.top_headlines_pagination.TopHeadlineScreenByPagination
+import me.anisjamadar.presentation.top_headlines_search.TopHeadlineSearchScreen
 
 sealed class Route(val name: String) {
     data object Main : Route("main")
     data object TopHeadline : Route("top_headline")
     data object TopHeadlineByPagination : Route("top_headline_by_pagination")
     data object TopHeadlineOfflineFirst : Route("top_headline_offline_first")
+    data object SearchTopHeadline : Route("search_top_headline")
 }
 
 @Composable
@@ -39,6 +41,9 @@ fun NewsNavHost() {
                 },
                 onTopHeadlineOfflineFirstClick = {
                     navController.navigate(Route.TopHeadlineOfflineFirst.name)
+                },
+                onSearchTopHeadlineClick = {
+                    navController.navigate(Route.SearchTopHeadline.name)
                 }
             )
         }
@@ -67,6 +72,17 @@ fun NewsNavHost() {
 
         composable(route = Route.TopHeadlineOfflineFirst.name) {
             TopHeadlineOfflineFirstScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onNewsClick = {
+                    openChromeTab(context, it)
+                }
+            )
+        }
+
+        composable(route = Route.SearchTopHeadline.name) {
+            TopHeadlineSearchScreen(
                 onBackClick = {
                     navController.popBackStack()
                 },

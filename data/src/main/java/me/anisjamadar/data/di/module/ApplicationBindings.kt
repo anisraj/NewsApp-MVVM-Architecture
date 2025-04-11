@@ -7,9 +7,11 @@ import dagger.hilt.components.SingletonComponent
 import me.anisjamadar.data.repository.NewsRepositoryByPaginationImpl
 import me.anisjamadar.data.repository.NewsRepositoryImpl
 import me.anisjamadar.data.repository.OfflineFirstNewsRepositoryImpl
+import me.anisjamadar.data.repository.SearchNewsRepositoryImpl
 import me.anisjamadar.domain.repository.NewsRepository
 import me.anisjamadar.domain.repository.NewsRepositoryByPagination
 import me.anisjamadar.domain.repository.OfflineFirstNewsRepository
+import me.anisjamadar.domain.repository.SearchNewsRepository
 import javax.inject.Singleton
 
 @Module
@@ -26,4 +28,8 @@ interface ApplicationBindings {
     @Binds
     @Singleton
     fun bindOfflineFirstNewsRepository(impl: OfflineFirstNewsRepositoryImpl): OfflineFirstNewsRepository
+
+    @Binds
+    @Singleton
+    fun bindSearchNewsRepository(impl: SearchNewsRepositoryImpl): SearchNewsRepository
 }

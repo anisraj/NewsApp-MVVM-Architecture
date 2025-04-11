@@ -2,6 +2,7 @@
 <resources>
     <string name="loading">Loading</string>
     <string name="top_headlines">Top Headlines</string>
+    <string name="search_top_headlines">Search Top Headlines</string>
     <string name="top_headlines_pagination">Top Headlines Pagination</string>
     <string name="top_headlines_offline_first">Top Headlines Offline First</string>
     <string name="retry">Retry</string>
