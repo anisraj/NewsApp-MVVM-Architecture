@@ -50,6 +50,7 @@ class TopHeadlineSearchViewModel @Inject constructor(
                 }
                 .distinctUntilChanged()
                 .flatMapLatest {
+                    _uiState.value = UiState.Loading
                     useCase.getTopHeadlines(COUNTRY, it)
                 }
                 .flowOn(Dispatchers.IO)
