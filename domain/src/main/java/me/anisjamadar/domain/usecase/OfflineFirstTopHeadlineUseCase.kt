@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import me.anisjamadar.domain.model.Article
 import me.anisjamadar.domain.repository.OfflineFirstNewsRepository
 import javax.inject.Inject
@@ -23,7 +24,11 @@ class OfflineFirstTopHeadlineUseCase @Inject constructor(
     val errorTrigger: SharedFlow<Throwable> = _errorTrigger.asSharedFlow()
 
     fun flowOfArticles(): Flow<List<Article>> {
-        return repository.flowOfArticles()
+        return repository
+            .flowOfArticles()
+            .catch {
+                _errorTrigger.emit(it)
+            }
     }
 
     suspend fun updateArticles(country: String) {

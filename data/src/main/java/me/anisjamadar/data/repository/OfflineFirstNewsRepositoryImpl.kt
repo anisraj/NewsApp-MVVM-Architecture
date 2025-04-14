@@ -28,11 +28,11 @@ class OfflineFirstNewsRepositoryImpl @Inject constructor(
 
     override suspend fun updateArticles(country: String): Result<List<Article>> {
         return kotlin.runCatching {
-            networkService.getTopHeadlines(country).articles
-        }.onSuccess { articles ->
-            databaseService.deleteAllAndUpdate(articles.map { article ->
-                mapper.transformToEntity(article)
-            })
+            networkService.getTopHeadlines(country).articles.also {
+                databaseService.deleteAllAndUpdate(it.map { article ->
+                    mapper.transformToEntity(article)
+                })
+            }
         }
     }
 }
